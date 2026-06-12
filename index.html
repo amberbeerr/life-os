@@ -1338,10 +1338,19 @@ async function callGemini(prompt, boxId, textId) {
       const reply = data.candidates[0].content.parts[0].text;
       textEl.textContent = reply;
       return reply;
+    } else if (data.error) {
+      const msg = data.error.message || '';
+      if (msg.includes('quota') || msg.includes('Quota')) {
+        textEl.textContent = '今日 AI 使用次數已達上限，明天會自動重置，請明天再試 🙏';
+      } else if (msg.includes('API key') || msg.includes('key')) {
+        textEl.textContent = 'API Key 有誤，請到設定頁面重新確認 🔑';
+      } else {
+        textEl.textContent = 'AI 回覆失敗，請稍後再試';
+      }
     } else {
-      textEl.textContent = data.error ? `Error: ${data.error.message}` : 'Check your API Key';
+      textEl.textContent = 'AI 回覆失敗，請檢查 API Key';
     }
-  } catch(e) { textEl.textContent = 'Connection failed. Check your network and API Key.'; }
+  } catch(e) { textEl.textContent = '網路連線失敗，請確認網路狀態後再試'; }
 }
 
 // ─── Settings ───────────────────────────────────────────
