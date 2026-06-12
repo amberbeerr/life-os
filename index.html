@@ -8,19 +8,22 @@
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap');
 
   :root {
-    --bg: #0f0f13;
-    --surface: #1a1a22;
-    --surface2: #22222e;
-    --border: #2e2e3e;
-    --accent: #7c6aff;
-    --accent2: #ff6a9e;
-    --accent3: #6affb8;
-    --text: #e8e8f0;
-    --text2: #9090a8;
-    --text3: #5a5a72;
-    --work: #7c6aff;
-    --life: #6affb8;
-    --diary: #ff6a9e;
+    --bg: #CCDCEB;
+    --surface: #ffffff;
+    --surface2: #e8f0f7;
+    --border: #b8cedd;
+    --accent: #DE7A5A;
+    --accent2: #684517;
+    --accent3: #a0c4de;
+    --text: #684517;
+    --text2: #7a5a2a;
+    --text3: #9a7a4a;
+    --btn-bg: #FBF7BA;
+    --btn-text: #DE7A5A;
+    --work: #DE7A5A;
+    --life: #7aab8a;
+    --diary: #b07ab0;
+    --period: #e07090;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -33,7 +36,6 @@
     padding-bottom: 80px;
   }
 
-  /* Header */
   .header {
     padding: 24px 20px 16px;
     border-bottom: 1px solid var(--border);
@@ -55,21 +57,13 @@
     font-size: 20px;
     font-weight: 700;
     letter-spacing: -0.5px;
+    color: var(--text);
   }
 
   .logo span { color: var(--accent); }
+  .date-str { font-size: 12px; color: var(--text3); }
+  .greeting { font-size: 13px; color: var(--text2); }
 
-  .date-str {
-    font-size: 12px;
-    color: var(--text3);
-  }
-
-  .greeting {
-    font-size: 13px;
-    color: var(--text2);
-  }
-
-  /* Nav */
   .nav {
     display: flex;
     gap: 8px;
@@ -88,24 +82,21 @@
     background: transparent;
     color: var(--text2);
     font-size: 13px;
-    font-family: 'Noto Sans TC', sans-serif;
+    font-family: 'Space Grotesk', sans-serif;
     cursor: pointer;
     transition: all 0.2s;
     white-space: nowrap;
   }
 
   .nav-btn.active-work { background: var(--work); border-color: var(--work); color: #fff; }
-  .nav-btn.active-life { background: var(--life); border-color: var(--life); color: #0f0f13; }
+  .nav-btn.active-life { background: var(--life); border-color: var(--life); color: #fff; }
   .nav-btn.active-diary { background: var(--diary); border-color: var(--diary); color: #fff; }
-  .nav-btn.active-settings { background: var(--surface2); border-color: var(--border); color: var(--text); }
+  .nav-btn.active-settings { background: var(--surface); border-color: var(--border); color: var(--text); }
 
-  /* Main */
   .main { padding: 20px; max-width: 600px; margin: 0 auto; }
-
   .section { display: none; }
   .section.active { display: block; }
 
-  /* Cards */
   .card {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -116,14 +107,14 @@
 
   .card-title {
     font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 1px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
     color: var(--text3);
     margin-bottom: 16px;
+    font-family: 'Space Grotesk', sans-serif;
   }
 
-  /* Today's todos */
   .today-header {
     display: flex;
     align-items: center;
@@ -143,7 +134,7 @@
     50% { opacity: 0.4; }
   }
 
-  .today-label { font-size: 15px; font-weight: 500; }
+  .today-label { font-size: 15px; font-weight: 500; color: var(--text); font-family: 'Space Grotesk', sans-serif; }
 
   .todo-list { display: flex; flex-direction: column; gap: 8px; }
 
@@ -172,21 +163,11 @@
     transition: all 0.2s;
   }
 
-  .todo-item.done .todo-check {
-    background: var(--work);
-    border-color: var(--work);
-  }
-
-  .todo-check::after {
-    content: '✓';
-    font-size: 11px;
-    color: #fff;
-    display: none;
-  }
-
+  .todo-item.done .todo-check { background: var(--work); border-color: var(--work); }
+  .todo-check::after { content: '✓'; font-size: 11px; color: #fff; display: none; }
   .todo-item.done .todo-check::after { display: block; }
 
-  .todo-text { font-size: 14px; flex: 1; }
+  .todo-text { font-size: 14px; flex: 1; color: var(--text); }
   .todo-client { font-size: 11px; color: var(--text3); }
 
   .empty-state {
@@ -196,7 +177,6 @@
     font-size: 14px;
   }
 
-  /* Inputs */
   input, textarea, select {
     width: 100%;
     background: var(--surface2);
@@ -211,11 +191,8 @@
     resize: none;
   }
 
-  input:focus, textarea:focus, select:focus {
-    border-color: var(--accent);
-  }
-
-  select option { background: var(--surface2); }
+  input:focus, textarea:focus, select:focus { border-color: var(--accent); }
+  select option { background: var(--surface); }
 
   .input-row {
     display: grid;
@@ -227,32 +204,28 @@
   .input-group { margin-bottom: 10px; }
   .input-label { font-size: 12px; color: var(--text3); margin-bottom: 6px; }
 
-  /* Buttons */
   .btn {
     padding: 12px 20px;
     border-radius: 10px;
     border: none;
-    font-family: 'Noto Sans TC', sans-serif;
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.2s;
     width: 100%;
+    background: var(--btn-bg);
+    color: var(--btn-text);
   }
 
-  .btn-work { background: var(--work); color: #fff; }
-  .btn-life { background: var(--life); color: #0f0f13; }
-  .btn-diary { background: var(--diary); color: #fff; }
+  .btn:active { transform: scale(0.98); }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
   .btn-outline {
     background: transparent;
     border: 1px solid var(--border);
     color: var(--text2);
   }
 
-  .btn:active { transform: scale(0.98); }
-  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
-
-  /* Client cards */
   .client-card {
     background: var(--surface2);
     border-radius: 12px;
@@ -261,8 +234,10 @@
     border-left: 3px solid var(--work);
   }
 
-  .client-name { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
+  .client-name { font-size: 15px; font-weight: 500; margin-bottom: 4px; color: var(--text); }
   .client-meta { font-size: 12px; color: var(--text3); }
+  .client-income { font-size: 13px; color: var(--work); font-weight: 600; margin-top: 4px; }
+
   .client-status {
     display: inline-block;
     padding: 2px 8px;
@@ -270,11 +245,10 @@
     font-size: 11px;
     margin-top: 6px;
   }
-  .status-active { background: rgba(124,106,255,0.2); color: var(--work); }
-  .status-pending { background: rgba(255,106,158,0.2); color: var(--diary); }
-  .status-done { background: rgba(106,255,184,0.2); color: var(--life); }
+  .status-active { background: rgba(222,122,90,0.15); color: var(--work); }
+  .status-pending { background: rgba(176,122,176,0.15); color: var(--diary); }
+  .status-done { background: rgba(122,171,138,0.15); color: var(--life); }
 
-  /* AI Response */
   .ai-box {
     background: var(--surface2);
     border: 1px solid var(--border);
@@ -295,20 +269,14 @@
     display: flex;
     align-items: center;
     gap: 6px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
   }
 
-  .ai-label::before {
-    content: '✦';
-    font-size: 10px;
-  }
-
+  .ai-label::before { content: '✦'; font-size: 10px; }
   .ai-text { font-size: 14px; line-height: 1.7; color: var(--text2); }
 
-  .ai-loading {
-    display: flex;
-    gap: 4px;
-    align-items: center;
-  }
+  .ai-loading { display: flex; gap: 4px; align-items: center; }
 
   .ai-loading span {
     width: 6px; height: 6px;
@@ -325,7 +293,6 @@
     50% { transform: translateY(-6px); }
   }
 
-  /* Life tracking sliders */
   .sleep-display {
     text-align: center;
     font-size: 40px;
@@ -355,7 +322,6 @@
     cursor: pointer;
   }
 
-  /* Mood buttons */
   .mood-row {
     display: flex;
     gap: 8px;
@@ -369,30 +335,19 @@
     border-radius: 10px;
     border: 1px solid var(--border);
     background: transparent;
-    font-size: 20px;
+    font-size: 18px;
     cursor: pointer;
     transition: all 0.2s;
     text-align: center;
+    color: var(--text);
   }
 
-  .mood-btn.selected {
-    border-color: var(--diary);
-    background: rgba(255,106,158,0.15);
-  }
+  .mood-btn.selected { border-color: var(--accent); background: rgba(222,122,90,0.1); }
 
-  /* Diary */
-  .diary-date {
-    font-size: 12px;
-    color: var(--text3);
-    margin-bottom: 12px;
-  }
+  textarea.diary-input { min-height: 180px; line-height: 1.8; }
 
-  textarea.diary-input {
-    min-height: 180px;
-    line-height: 1.8;
-  }
+  .diary-date { font-size: 12px; color: var(--text3); margin-bottom: 12px; }
 
-  /* Settings */
   .settings-item {
     display: flex;
     justify-content: space-between;
@@ -401,24 +356,9 @@
     border-bottom: 1px solid var(--border);
   }
 
-  .settings-label { font-size: 14px; }
+  .settings-label { font-size: 14px; color: var(--text); }
   .settings-sub { font-size: 12px; color: var(--text3); margin-top: 2px; }
 
-  .api-key-input { margin-top: 12px; }
-
-  /* Tags */
-  .tag {
-    display: inline-block;
-    padding: 3px 10px;
-    border-radius: 20px;
-    font-size: 11px;
-    margin: 2px;
-    background: var(--surface2);
-    color: var(--text2);
-    border: 1px solid var(--border);
-  }
-
-  /* Food log */
   .food-log { display: flex; flex-direction: column; gap: 8px; }
 
   .food-item {
@@ -430,7 +370,7 @@
     border-radius: 10px;
   }
 
-  .food-name { font-size: 14px; }
+  .food-name { font-size: 14px; color: var(--text); }
   .food-time { font-size: 12px; color: var(--text3); }
 
   .delete-btn {
@@ -443,7 +383,6 @@
     width: auto;
   }
 
-  /* History */
   .diary-history-item {
     background: var(--surface2);
     border-radius: 12px;
@@ -455,14 +394,13 @@
   .diary-history-date { font-size: 12px; color: var(--text3); margin-bottom: 6px; }
   .diary-history-preview { font-size: 14px; color: var(--text2); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 
-  /* Toast */
   .toast {
     position: fixed;
     bottom: 100px;
     left: 50%;
     transform: translateX(-50%) translateY(20px);
-    background: var(--surface2);
-    border: 1px solid var(--border);
+    background: var(--text);
+    color: var(--bg);
     padding: 10px 20px;
     border-radius: 20px;
     font-size: 13px;
@@ -472,17 +410,13 @@
     white-space: nowrap;
   }
 
-  .toast.show {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-  /* Bottom nav */
   .bottom-nav {
     position: fixed;
     bottom: 0;
     left: 0; right: 0;
-    background: var(--bg);
+    background: var(--surface);
     border-top: 1px solid var(--border);
     display: flex;
     padding: 8px 0 16px;
@@ -498,27 +432,63 @@
     border: none;
     cursor: pointer;
     padding: 6px;
-    transition: opacity 0.2s;
   }
 
   .bnb-icon { font-size: 22px; }
-  .bnb-label { font-size: 10px; color: var(--text3); }
+  .bnb-label { font-size: 10px; color: var(--text3); font-family: 'Space Grotesk', sans-serif; }
   .bottom-nav-btn.active-work .bnb-label { color: var(--work); }
   .bottom-nav-btn.active-life .bnb-label { color: var(--life); }
   .bottom-nav-btn.active-diary .bnb-label { color: var(--diary); }
   .bottom-nav-btn.active-settings .bnb-label { color: var(--text); }
 
-  /* Divider */
   .divider { height: 1px; background: var(--border); margin: 16px 0; }
 
-  .section-subtitle {
-    font-size: 13px;
-    color: var(--text2);
-    font-weight: 500;
-    margin-bottom: 12px;
-  }
+  .section-subtitle { font-size: 13px; color: var(--text2); font-weight: 500; margin-bottom: 12px; }
 
   .btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+  .income-badge {
+    display: inline-block;
+    background: rgba(222,122,90,0.12);
+    color: var(--work);
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: 4px;
+  }
+
+  .summary-box {
+    background: var(--surface2);
+    border-radius: 12px;
+    padding: 16px;
+    margin-top: 10px;
+    display: none;
+  }
+  .summary-box.show { display: block; }
+  .summary-text { font-size: 14px; line-height: 1.8; color: var(--text2); white-space: pre-wrap; }
+
+  .period-card-inner { display: flex; flex-direction: column; gap: 10px; }
+  .symptom-grid { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+  .symptom-tag {
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: transparent;
+    font-size: 12px;
+    color: var(--text2);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .symptom-tag.selected { background: rgba(224,112,144,0.15); border-color: var(--period); color: var(--period); }
+
+  .period-log-item {
+    background: var(--surface2);
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 8px;
+    border-left: 3px solid var(--period);
+  }
 </style>
 </head>
 <body>
@@ -532,38 +502,36 @@
 </div>
 
 <div class="nav">
-  <button class="nav-btn active-work" onclick="switchTab('work')">🗂 工作</button>
-  <button class="nav-btn" onclick="switchTab('life')">🌿 生活</button>
-  <button class="nav-btn" onclick="switchTab('diary')">📔 日記</button>
-  <button class="nav-btn" onclick="switchTab('settings')">⚙️ 設定</button>
+  <button class="nav-btn active-work" onclick="switchTab('work')">💼 Project</button>
+  <button class="nav-btn" onclick="switchTab('life')">🌿 Life</button>
+  <button class="nav-btn" onclick="switchTab('diary')">📔 Diary</button>
+  <button class="nav-btn" onclick="switchTab('settings')">⚙️ Settings</button>
 </div>
 
 <div class="main">
 
-  <!-- WORK SECTION -->
+  <!-- PROJECT SECTION -->
   <div class="section active" id="section-work">
 
-    <!-- Today's Todos -->
     <div class="card">
       <div class="today-header">
         <div class="dot"></div>
-        <div class="today-label">今日待辦</div>
+        <div class="today-label">Today's Tasks</div>
       </div>
       <div class="todo-list" id="todoList">
-        <div class="empty-state">還沒有待辦事項<br>從下方新增客戶與項目開始</div>
+        <div class="empty-state">No tasks yet — add a project below</div>
       </div>
     </div>
 
-    <!-- Add Client -->
     <div class="card">
-      <div class="card-title">新增客戶</div>
+      <div class="card-title">New Project</div>
       <div class="input-group">
-        <div class="input-label">客戶名稱</div>
-        <input type="text" id="clientName" placeholder="例：小美咖啡廳">
+        <div class="input-label">Project / Client Name</div>
+        <input type="text" id="clientName" placeholder="e.g. 小美咖啡廳 / Resume">
       </div>
       <div class="input-row">
         <div>
-          <div class="input-label">平台</div>
+          <div class="input-label">Platform</div>
           <select id="clientPlatform">
             <option>Instagram</option>
             <option>Facebook</option>
@@ -571,52 +539,68 @@
             <option>小紅書</option>
             <option>YouTube</option>
             <option>多平台</option>
+            <option>其他 — 手動填寫</option>
           </select>
         </div>
         <div>
-          <div class="input-label">內容類型</div>
+          <div class="input-label">Content Type</div>
           <select id="clientType">
             <option>圖文貼文</option>
             <option>限時動態</option>
             <option>影片腳本</option>
             <option>文案撰寫</option>
             <option>帳號管理</option>
+            <option>履歷 / 作品集</option>
+            <option>其他 — 手動填寫</option>
           </select>
         </div>
       </div>
-      <div class="input-group">
-        <div class="input-label">本週截止日期</div>
-        <input type="date" id="clientDeadline">
+      <div class="input-group" id="platformOtherGroup" style="display:none">
+        <div class="input-label">自訂平台</div>
+        <input type="text" id="platformOther" placeholder="填入平台名稱">
+      </div>
+      <div class="input-group" id="typeOtherGroup" style="display:none">
+        <div class="input-label">自訂類型</div>
+        <input type="text" id="typeOther" placeholder="填入內容類型">
+      </div>
+      <div class="input-row">
+        <div>
+          <div class="input-label">Deadline</div>
+          <input type="date" id="clientDeadline">
+        </div>
+        <div>
+          <div class="input-label">Income (TWD)</div>
+          <input type="number" id="clientIncome" placeholder="0" min="0">
+        </div>
       </div>
       <div class="input-group">
-        <div class="input-label">備註</div>
-        <input type="text" id="clientNote" placeholder="例：每週2篇，每篇需含hashtag">
+        <div class="input-label">Notes</div>
+        <input type="text" id="clientNote" placeholder="e.g. 每週2篇，需含hashtag">
       </div>
-      <button class="btn btn-work" onclick="addClient()">新增客戶</button>
+      <button class="btn" onclick="addClient()">Add Project</button>
     </div>
 
-    <!-- Client List -->
     <div class="card">
-      <div class="card-title">客戶清單</div>
+      <div class="card-title">Project List</div>
+      <div id="incomeTotal" style="margin-bottom:12px;font-size:13px;color:var(--text3)"></div>
       <div id="clientList">
-        <div class="empty-state">還沒有客戶</div>
+        <div class="empty-state">No projects yet</div>
       </div>
     </div>
 
-    <!-- Add Todo -->
     <div class="card">
-      <div class="card-title">新增今日待辦</div>
+      <div class="card-title">Add Task for Today</div>
       <div class="input-group">
-        <div class="input-label">任務描述</div>
-        <input type="text" id="todoText" placeholder="例：製作IG輪播圖">
+        <div class="input-label">Task</div>
+        <input type="text" id="todoText" placeholder="e.g. 製作IG輪播圖">
       </div>
       <div class="input-group">
-        <div class="input-label">關聯客戶</div>
+        <div class="input-label">Related Project</div>
         <select id="todoClient">
-          <option value="">— 選擇客戶 —</option>
+          <option value="">— Optional —</option>
         </select>
       </div>
-      <button class="btn btn-work" onclick="addTodo()">加入今日待辦</button>
+      <button class="btn" onclick="addTodo()">Add Task</button>
     </div>
 
   </div>
@@ -624,45 +608,43 @@
   <!-- LIFE SECTION -->
   <div class="section" id="section-life">
 
-    <!-- Sleep -->
     <div class="card">
-      <div class="card-title">昨晚睡眠</div>
+      <div class="card-title">Sleep</div>
       <div class="sleep-display" id="sleepDisplay">7.0 hrs</div>
-      <div class="sleep-sub">滑動調整</div>
+      <div class="sleep-sub">slide to adjust</div>
       <input type="range" id="sleepSlider" min="3" max="12" step="0.5" value="7" oninput="updateSleep(this.value)">
       <div class="input-row">
         <div>
-          <div class="input-label">入睡時間</div>
+          <div class="input-label">Bedtime</div>
           <input type="time" id="sleepStart" value="23:30">
         </div>
         <div>
-          <div class="input-label">起床時間</div>
+          <div class="input-label">Wake up</div>
           <input type="time" id="sleepEnd" value="07:00">
         </div>
       </div>
       <div class="input-group">
-        <div class="input-label">睡眠品質</div>
+        <div class="input-label">Sleep Quality</div>
         <div class="mood-row" id="sleepQuality">
-          <button class="mood-btn" onclick="selectSleep(this, '😫')">😫</button>
-          <button class="mood-btn" onclick="selectSleep(this, '😕')">😕</button>
-          <button class="mood-btn selected" onclick="selectSleep(this, '😐')">😐</button>
-          <button class="mood-btn" onclick="selectSleep(this, '😊')">😊</button>
-          <button class="mood-btn" onclick="selectSleep(this, '😴')">😴</button>
+          <button class="mood-btn" onclick="selectSleep(this,'😫')">😫</button>
+          <button class="mood-btn" onclick="selectSleep(this,'😕')">😕</button>
+          <button class="mood-btn selected" onclick="selectSleep(this,'😐')">😐</button>
+          <button class="mood-btn" onclick="selectSleep(this,'😊')">😊</button>
+          <button class="mood-btn" onclick="selectSleep(this,'😴')">😴</button>
         </div>
       </div>
-      <button class="btn btn-life" onclick="recordSleep()">記錄睡眠</button>
+      <button class="btn" onclick="recordSleep()">Save & Suggestion</button>
       <div class="ai-box" id="sleepAI">
-        <div class="ai-label">AI 睡眠建議</div>
+        <div class="ai-label">AI Sleep Insight</div>
         <div class="ai-text" id="sleepAIText"></div>
       </div>
     </div>
 
-    <!-- Food -->
     <div class="card">
-      <div class="card-title">飲食記錄</div>
+      <div class="card-title">Food</div>
       <div class="input-row">
         <div>
-          <div class="input-label">餐點</div>
+          <div class="input-label">Meal</div>
           <select id="mealType">
             <option>早餐</option>
             <option>午餐</option>
@@ -672,33 +654,32 @@
           </select>
         </div>
         <div>
-          <div class="input-label">時間</div>
+          <div class="input-label">Time</div>
           <input type="time" id="mealTime">
         </div>
       </div>
       <div class="input-group">
-        <div class="input-label">吃了什麼</div>
-        <input type="text" id="foodInput" placeholder="例：蛋餅、豆漿、水煮蛋" onkeydown="if(event.key==='Enter')addFood()">
+        <div class="input-label">What did you eat?</div>
+        <input type="text" id="foodInput" placeholder="e.g. 蛋餅、豆漿" onkeydown="if(event.key==='Enter')addFood()">
       </div>
       <div class="btn-row" style="margin-bottom:10px">
-        <button class="btn btn-life" onclick="addFood()">記錄</button>
-        <button class="btn btn-outline" onclick="getAIFoodAdvice()">AI 分析今日飲食</button>
+        <button class="btn" onclick="addFood()">Log</button>
+        <button class="btn btn-outline" onclick="getAIFoodAdvice()">Save & Suggestion</button>
       </div>
       <div class="food-log" id="foodLog">
-        <div class="empty-state">今天還沒有飲食記錄</div>
+        <div class="empty-state">No food logged today</div>
       </div>
       <div class="ai-box" id="foodAI">
-        <div class="ai-label">AI 飲食建議</div>
+        <div class="ai-label">AI Nutrition Insight</div>
         <div class="ai-text" id="foodAIText"></div>
       </div>
     </div>
 
-    <!-- Exercise -->
     <div class="card">
-      <div class="card-title">運動記錄</div>
+      <div class="card-title">Workout</div>
       <div class="input-row">
         <div>
-          <div class="input-label">運動類型</div>
+          <div class="input-label">Type</div>
           <select id="exerciseType">
             <option>走路／散步</option>
             <option>跑步</option>
@@ -712,33 +693,79 @@
           </select>
         </div>
         <div>
-          <div class="input-label">時間（分鐘）</div>
+          <div class="input-label">Duration (min)</div>
           <input type="number" id="exerciseDuration" placeholder="30" min="1" max="300">
         </div>
       </div>
       <div class="input-group">
-        <div class="input-label">強度感受</div>
+        <div class="input-label">Intensity</div>
         <div class="mood-row" id="exerciseIntensity">
-          <button class="mood-btn" onclick="selectIntensity(this,'輕鬆')">😌<div style="font-size:10px;margin-top:2px">輕鬆</div></button>
-          <button class="mood-btn selected" onclick="selectIntensity(this,'普通')">💪<div style="font-size:10px;margin-top:2px">普通</div></button>
-          <button class="mood-btn" onclick="selectIntensity(this,'有點累')">😤<div style="font-size:10px;margin-top:2px">有點累</div></button>
-          <button class="mood-btn" onclick="selectIntensity(this,'很累')">🥵<div style="font-size:10px;margin-top:2px">很累</div></button>
+          <button class="mood-btn" onclick="selectIntensity(this,'輕鬆')">😌<div style="font-size:10px;margin-top:2px">Easy</div></button>
+          <button class="mood-btn selected" onclick="selectIntensity(this,'普通')">💪<div style="font-size:10px;margin-top:2px">Medium</div></button>
+          <button class="mood-btn" onclick="selectIntensity(this,'有點累')">😤<div style="font-size:10px;margin-top:2px">Hard</div></button>
+          <button class="mood-btn" onclick="selectIntensity(this,'很累')">🥵<div style="font-size:10px;margin-top:2px">Max</div></button>
         </div>
       </div>
       <div class="input-group">
-        <div class="input-label">補充說明（選填）</div>
-        <input type="text" id="exerciseNote" placeholder="例：今天跑完5公里，配速還不錯">
+        <div class="input-label">Notes (optional)</div>
+        <input type="text" id="exerciseNote" placeholder="e.g. 跑完5公里，配速不錯">
       </div>
-      <button class="btn btn-life" onclick="recordExercise()">記錄並獲得 AI 鼓勵</button>
+      <button class="btn" onclick="recordExercise()">Save & Suggestion</button>
       <div class="ai-box" id="exerciseAI">
-        <div class="ai-label">AI 運動回饋</div>
+        <div class="ai-label">AI Workout Feedback</div>
         <div class="ai-text" id="exerciseAIText"></div>
       </div>
-
-      <!-- Exercise log -->
       <div style="margin-top:14px">
-        <div class="section-subtitle">今日運動紀錄</div>
-        <div id="exerciseLog"><div class="empty-state">今天還沒有運動記錄</div></div>
+        <div class="section-subtitle">Today's Workout Log</div>
+        <div id="exerciseLog"><div class="empty-state">No workout logged today</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Period</div>
+      <div class="input-group">
+        <div class="input-label">Start Date</div>
+        <input type="date" id="periodStart">
+      </div>
+      <div class="input-group">
+        <div class="input-label">Duration (days)</div>
+        <input type="number" id="periodDays" placeholder="5" min="1" max="10">
+      </div>
+      <div class="input-group">
+        <div class="input-label">Symptoms</div>
+        <div class="symptom-grid" id="symptomGrid">
+          <button class="symptom-tag" onclick="toggleSymptom(this)">痛經</button>
+          <button class="symptom-tag" onclick="toggleSymptom(this)">頭痛</button>
+          <button class="symptom-tag" onclick="toggleSymptom(this)">腹脹</button>
+          <button class="symptom-tag" onclick="toggleSymptom(this)">腰痠</button>
+          <button class="symptom-tag" onclick="toggleSymptom(this)">疲倦</button>
+          <button class="symptom-tag" onclick="toggleSymptom(this)">情緒波動</button>
+          <button class="symptom-tag" onclick="toggleSymptom(this)">食慾增加</button>
+          <button class="symptom-tag" onclick="toggleSymptom(this)">失眠</button>
+          <button class="symptom-tag" onclick="toggleSymptom(this)">噁心</button>
+          <button class="symptom-tag" onclick="toggleSymptom(this)">皮膚狀況差</button>
+        </div>
+      </div>
+      <div class="input-group">
+        <div class="input-label">Flow Level</div>
+        <div class="mood-row" id="flowLevel">
+          <button class="mood-btn" onclick="selectFlow(this,'少')">💧<div style="font-size:10px;margin-top:2px">少</div></button>
+          <button class="mood-btn selected" onclick="selectFlow(this,'普通')">💧💧<div style="font-size:10px;margin-top:2px">普通</div></button>
+          <button class="mood-btn" onclick="selectFlow(this,'多')">💧💧💧<div style="font-size:10px;margin-top:2px">多</div></button>
+        </div>
+      </div>
+      <div class="input-group">
+        <div class="input-label">How do you feel?</div>
+        <textarea id="periodNote" placeholder="今天身體感受、心情..." style="min-height:80px"></textarea>
+      </div>
+      <button class="btn" onclick="recordPeriod()">Save & Suggestion</button>
+      <div class="ai-box" id="periodAI">
+        <div class="ai-label">AI Period Insight</div>
+        <div class="ai-text" id="periodAIText"></div>
+      </div>
+      <div style="margin-top:14px">
+        <div class="section-subtitle">Period History</div>
+        <div id="periodLog"><div class="empty-state">No records yet</div></div>
       </div>
     </div>
 
@@ -748,11 +775,10 @@
   <div class="section" id="section-diary">
 
     <div class="card">
-      <div class="card-title">今日日記</div>
+      <div class="card-title">Diary</div>
       <div class="diary-date" id="diaryDate"></div>
-
       <div class="input-group">
-        <div class="input-label">今天心情</div>
+        <div class="input-label">Today's Mood</div>
         <div class="mood-row" id="diaryMood">
           <button class="mood-btn" onclick="selectMood(this,'😤')">😤</button>
           <button class="mood-btn" onclick="selectMood(this,'😢')">😢</button>
@@ -761,25 +787,21 @@
           <button class="mood-btn" onclick="selectMood(this,'😄')">😄</button>
         </div>
       </div>
-
       <div class="input-group">
-        <div class="input-label">今天發生了什麼？心裡有什麼想說的？</div>
-        <textarea class="diary-input" id="diaryInput" placeholder="隨意寫，這裡是你的私人空間..."></textarea>
+        <div class="input-label">What's on your mind today?</div>
+        <textarea class="diary-input" id="diaryInput" placeholder="This is your safe space. Write freely..."></textarea>
       </div>
-
-      <button class="btn btn-diary" onclick="saveDiary()" id="saveDiaryBtn">儲存並請 AI 分析</button>
-
+      <button class="btn" onclick="saveDiary()">Save & Suggestion</button>
       <div class="ai-box" id="diaryAI">
-        <div class="ai-label">AI 心理觀察</div>
+        <div class="ai-label">AI Mind Check-in</div>
         <div class="ai-text" id="diaryAIText"></div>
       </div>
     </div>
 
-    <!-- History -->
     <div class="card">
-      <div class="card-title">過去日記</div>
+      <div class="card-title">Past Entries</div>
       <div id="diaryHistory">
-        <div class="empty-state">還沒有日記記錄</div>
+        <div class="empty-state">No diary entries yet</div>
       </div>
     </div>
 
@@ -788,33 +810,18 @@
   <!-- SETTINGS SECTION -->
   <div class="section" id="section-settings">
     <div class="card">
-      <div class="card-title">設定</div>
+      <div class="card-title">Settings</div>
 
       <div class="settings-item">
         <div>
           <div class="settings-label">Gemini API Key</div>
-          <div class="settings-sub">用於 AI 即時分析功能</div>
-        </div>
-      </div>
-      <div class="api-key-input">
-        <input type="password" id="apiKeyInput" placeholder="貼上你的 Gemini API Key">
-        <div style="margin-top:8px">
-          <button class="btn btn-outline" onclick="saveApiKey()">儲存 API Key</button>
-        </div>
-      </div>
-
-      <div class="divider"></div>
-
-      <div class="settings-item">
-        <div>
-          <div class="settings-label">你的名字</div>
-          <div class="settings-sub">用於個人化問候</div>
+          <div class="settings-sub">Required for AI suggestions</div>
         </div>
       </div>
       <div style="margin-top:8px">
-        <input type="text" id="nameInput" placeholder="你的名字">
+        <input type="password" id="apiKeyInput" placeholder="Paste your Gemini API Key">
         <div style="margin-top:8px">
-          <button class="btn btn-outline" onclick="saveName()">儲存</button>
+          <button class="btn" onclick="saveApiKey()">Save API Key</button>
         </div>
       </div>
 
@@ -822,205 +829,226 @@
 
       <div class="settings-item">
         <div>
-          <div class="settings-label">清除所有資料</div>
-          <div class="settings-sub">刪除本機儲存的全部資料</div>
+          <div class="settings-label">Your Name</div>
+          <div class="settings-sub">For personalized greeting</div>
         </div>
-        <button class="btn btn-outline" style="width:auto;padding:6px 12px;font-size:12px" onclick="clearAll()">清除</button>
+      </div>
+      <div style="margin-top:8px">
+        <input type="text" id="nameInput" placeholder="Your name">
+        <div style="margin-top:8px">
+          <button class="btn" onclick="saveName()">Save</button>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="settings-item">
+        <div>
+          <div class="settings-label">Clear All Data</div>
+          <div class="settings-sub">Remove all locally stored data</div>
+        </div>
+        <button class="btn btn-outline" style="width:auto;padding:6px 12px;font-size:12px" onclick="clearAll()">Clear</button>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-title">關於 Life OS</div>
+      <div class="card-title">Monthly Summary</div>
+      <div style="font-size:13px;color:var(--text3);margin-bottom:14px;line-height:1.6">
+        Generate an AI summary of this month's work, life habits, and mental state.
+      </div>
+      <button class="btn" onclick="generateMonthlySummary()">✦ Generate This Month's Report</button>
+      <div class="summary-box" id="summaryBox">
+        <div class="ai-label">Monthly Report</div>
+        <div class="summary-text" id="summaryText"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">About Life OS</div>
       <div style="font-size:13px;color:var(--text2);line-height:1.8">
-        Life OS 是你的個人自動化管理系統，整合工作項目追蹤、生活習慣記錄與心理日記，搭配 Gemini AI 即時給予建議。<br><br>
-        資料儲存在瀏覽器本機（localStorage），不會上傳到任何伺服器。
+        Life OS is your personal management system for work projects, life habits, and mental health — powered by Gemini AI.<br><br>
+        All data is stored locally on your device and never uploaded anywhere.
       </div>
     </div>
   </div>
 
 </div>
 
-<!-- Bottom Nav -->
 <div class="bottom-nav">
   <button class="bottom-nav-btn active-work" id="bnb-work" onclick="switchTab('work')">
-    <span class="bnb-icon">🗂</span>
-    <span class="bnb-label">工作</span>
+    <span class="bnb-icon">💼</span>
+    <span class="bnb-label">Project</span>
   </button>
   <button class="bottom-nav-btn" id="bnb-life" onclick="switchTab('life')">
     <span class="bnb-icon">🌿</span>
-    <span class="bnb-label">生活</span>
+    <span class="bnb-label">Life</span>
   </button>
   <button class="bottom-nav-btn" id="bnb-diary" onclick="switchTab('diary')">
     <span class="bnb-icon">📔</span>
-    <span class="bnb-label">日記</span>
+    <span class="bnb-label">Diary</span>
   </button>
   <button class="bottom-nav-btn" id="bnb-settings" onclick="switchTab('settings')">
     <span class="bnb-icon">⚙️</span>
-    <span class="bnb-label">設定</span>
+    <span class="bnb-label">Settings</span>
   </button>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-// ─── State ────────────────────────────────────────────
-let clients = JSON.parse(localStorage.getItem('lifeos_clients') || '[]');
-let todos = JSON.parse(localStorage.getItem('lifeos_todos') || '[]');
-let foods = JSON.parse(localStorage.getItem('lifeos_foods') || '[]');
-let diaries = JSON.parse(localStorage.getItem('lifeos_diaries') || '[]');
+// ─── State ─────────────────────────────────────────────
+let clients   = JSON.parse(localStorage.getItem('lifeos_clients')   || '[]');
+let todos     = JSON.parse(localStorage.getItem('lifeos_todos')     || '[]');
+let foods     = JSON.parse(localStorage.getItem('lifeos_foods')     || '[]');
+let diaries   = JSON.parse(localStorage.getItem('lifeos_diaries')   || '[]');
+let exercises = JSON.parse(localStorage.getItem('lifeos_exercises') || '[]');
+let periods   = JSON.parse(localStorage.getItem('lifeos_periods')   || '[]');
 let selectedMood = '😐';
 let selectedSleepQuality = '😐';
-let apiKey = localStorage.getItem('lifeos_apikey') || '';
-let userName = localStorage.getItem('lifeos_name') || '';
+let selectedIntensityVal = '普通';
+let selectedFlow = '普通';
+let selectedSymptoms = [];
+let apiKey  = localStorage.getItem('lifeos_apikey') || '';
+let userName = localStorage.getItem('lifeos_name')  || '';
 
-// ─── Init ─────────────────────────────────────────────
+// ─── Init ───────────────────────────────────────────────
 function init() {
   const now = new Date();
-  const days = ['日','一','二','三','四','五','六'];
+  const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
   document.getElementById('dateStr').textContent =
-    `${now.getMonth()+1}/${now.getDate()} 週${days[now.getDay()]}`;
+    `${now.getMonth()+1}/${now.getDate()} ${days[now.getDay()]}`;
 
   const h = now.getHours();
-  const greet = h < 12 ? '早安' : h < 17 ? '午安' : '晚安';
+  const greet = h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening';
   document.getElementById('greeting').textContent =
-    userName ? `${greet}，${userName} 👋` : `${greet} 👋 今天也加油！`;
+    userName ? `${greet}, ${userName} 👋` : `${greet} 👋 Let's make today count.`;
 
   document.getElementById('diaryDate').textContent =
-    `${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日`;
+    `${now.getFullYear()}. ${now.getMonth()+1}. ${now.getDate()}`;
 
-  // Set default meal time
   const hh = String(now.getHours()).padStart(2,'0');
   const mm = String(now.getMinutes()).padStart(2,'0');
   document.getElementById('mealTime').value = `${hh}:${mm}`;
+  document.getElementById('periodStart').value = toDateStr(now);
 
-  if (apiKey) document.getElementById('apiKeyInput').value = apiKey;
-  if (userName) document.getElementById('nameInput').value = userName;
+  if (apiKey)  document.getElementById('apiKeyInput').value = apiKey;
+  if (userName) document.getElementById('nameInput').value  = userName;
 
-  // Filter today's todos
   const today = toDateStr(now);
-  todos = todos.filter(t => t.date === today || !t.date);
-  todos.forEach(t => { t.date = today; });
+  todos     = todos.filter(t => t.date === today);
+  foods     = foods.filter(f => f.date === today);
+  exercises = exercises.filter(e => e.date === today);
 
-  // Filter today's foods
-  foods = foods.filter(f => f.date === today);
+  // Platform/Type other toggle
+  document.getElementById('clientPlatform').addEventListener('change', function() {
+    document.getElementById('platformOtherGroup').style.display =
+      this.value === '其他 — 手動填寫' ? 'block' : 'none';
+  });
+  document.getElementById('clientType').addEventListener('change', function() {
+    document.getElementById('typeOtherGroup').style.display =
+      this.value === '其他 — 手動填寫' ? 'block' : 'none';
+  });
 
-  // Filter today's exercises
-  exercises = exercises.filter(e => e.date === toDateStr(new Date()));
-
-  renderTodos();
-  renderClients();
-  renderFoods();
-  renderExerciseLog();
-  renderDiaryHistory();
+  renderTodos(); renderClients(); renderFoods();
+  renderExerciseLog(); renderDiaryHistory(); renderPeriodLog();
 }
 
 function toDateStr(d) {
   return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 }
 
-// ─── Tab switching ─────────────────────────────────────
+// ─── Tabs ───────────────────────────────────────────────
 function switchTab(tab) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b => b.className = 'nav-btn');
   document.querySelectorAll('.bottom-nav-btn').forEach(b => b.className = 'bottom-nav-btn');
-
   document.getElementById('section-' + tab).classList.add('active');
   document.querySelector(`.nav-btn[onclick="switchTab('${tab}')"]`).classList.add('active-' + tab);
   document.getElementById('bnb-' + tab).classList.add('active-' + tab);
 }
 
-// ─── Work ─────────────────────────────────────────────
+// ─── Project ────────────────────────────────────────────
 function addClient() {
   const name = document.getElementById('clientName').value.trim();
-  if (!name) { showToast('請輸入客戶名稱'); return; }
+  if (!name) { showToast('Please enter a project name'); return; }
 
-  const client = {
-    id: Date.now(),
-    name,
-    platform: document.getElementById('clientPlatform').value,
-    type: document.getElementById('clientType').value,
+  let platform = document.getElementById('clientPlatform').value;
+  let type     = document.getElementById('clientType').value;
+  if (platform === '其他 — 手動填寫') platform = document.getElementById('platformOther').value || 'Other';
+  if (type     === '其他 — 手動填寫') type     = document.getElementById('typeOther').value     || 'Other';
+
+  clients.push({
+    id: Date.now(), name, platform, type,
     deadline: document.getElementById('clientDeadline').value,
-    note: document.getElementById('clientNote').value.trim(),
+    income:   document.getElementById('clientIncome').value || 0,
+    note:     document.getElementById('clientNote').value.trim(),
     status: 'active'
-  };
+  });
 
-  clients.push(client);
-  save();
-  renderClients();
-  updateTodoClientSelect();
-
+  save(); renderClients(); updateTodoClientSelect();
   document.getElementById('clientName').value = '';
   document.getElementById('clientNote').value = '';
-  showToast('✅ 客戶已新增');
+  document.getElementById('clientIncome').value = '';
+  showToast('✅ Project added');
 }
 
 function renderClients() {
   const el = document.getElementById('clientList');
-  if (!clients.length) {
-    el.innerHTML = '<div class="empty-state">還沒有客戶</div>';
-    return;
-  }
+  if (!clients.length) { el.innerHTML = '<div class="empty-state">No projects yet</div>'; updateIncomeTotal(); return; }
+
   el.innerHTML = clients.map(c => `
     <div class="client-card">
       <div style="display:flex;justify-content:space-between;align-items:start">
         <div>
           <div class="client-name">${c.name}</div>
           <div class="client-meta">${c.platform} · ${c.type}</div>
-          ${c.deadline ? `<div class="client-meta">截止：${c.deadline}</div>` : ''}
+          ${c.deadline ? `<div class="client-meta">Due: ${c.deadline}</div>` : ''}
           ${c.note ? `<div class="client-meta">${c.note}</div>` : ''}
+          ${c.income > 0 ? `<div class="income-badge">💰 NT$ ${Number(c.income).toLocaleString()}</div>` : ''}
           <span class="client-status status-${c.status}">${
-            c.status === 'active' ? '進行中' : c.status === 'pending' ? '待確認' : '完成'
+            c.status === 'active' ? 'In Progress' : c.status === 'pending' ? 'Pending' : 'Done'
           }</span>
         </div>
         <button class="delete-btn" onclick="deleteClient(${c.id})">✕</button>
       </div>
     </div>
   `).join('');
+  updateIncomeTotal();
   updateTodoClientSelect();
+}
+
+function updateIncomeTotal() {
+  const total = clients.reduce((sum, c) => sum + Number(c.income || 0), 0);
+  const el = document.getElementById('incomeTotal');
+  el.textContent = total > 0 ? `Total project income: NT$ ${total.toLocaleString()}` : '';
 }
 
 function deleteClient(id) {
   clients = clients.filter(c => c.id !== id);
-  save();
-  renderClients();
-  showToast('客戶已刪除');
+  save(); renderClients(); showToast('Project removed');
 }
 
 function updateTodoClientSelect() {
   const sel = document.getElementById('todoClient');
-  sel.innerHTML = '<option value="">— 選擇客戶（選填）—</option>' +
+  sel.innerHTML = '<option value="">— Optional —</option>' +
     clients.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
 }
 
 function addTodo() {
   const text = document.getElementById('todoText').value.trim();
-  if (!text) { showToast('請輸入任務描述'); return; }
-
+  if (!text) { showToast('Please enter a task'); return; }
   const today = toDateStr(new Date());
-  todos.push({
-    id: Date.now(),
-    text,
-    client: document.getElementById('todoClient').value,
-    done: false,
-    date: today
-  });
-
-  save();
-  renderTodos();
+  todos.push({ id: Date.now(), text, client: document.getElementById('todoClient').value, done: false, date: today });
+  save(); renderTodos();
   document.getElementById('todoText').value = '';
-  showToast('✅ 待辦已新增');
+  showToast('✅ Task added');
 }
 
 function renderTodos() {
   const el = document.getElementById('todoList');
   const today = toDateStr(new Date());
   const todayTodos = todos.filter(t => t.date === today);
-
-  if (!todayTodos.length) {
-    el.innerHTML = '<div class="empty-state">今天還沒有待辦事項</div>';
-    return;
-  }
-
+  if (!todayTodos.length) { el.innerHTML = '<div class="empty-state">No tasks yet — add a project below</div>'; return; }
   el.innerHTML = todayTodos.map(t => `
     <div class="todo-item ${t.done ? 'done' : ''}" onclick="toggleTodo(${t.id})">
       <div class="todo-check"></div>
@@ -1037,177 +1065,163 @@ function toggleTodo(id) {
   if (t) { t.done = !t.done; save(); renderTodos(); }
 }
 
-// ─── Life ─────────────────────────────────────────────
-function updateSleep(val) {
-  document.getElementById('sleepDisplay').textContent = `${val} hrs`;
-}
+// ─── Sleep ──────────────────────────────────────────────
+function updateSleep(val) { document.getElementById('sleepDisplay').textContent = `${val} hrs`; }
 
 function selectSleep(btn, emoji) {
   document.querySelectorAll('#sleepQuality .mood-btn').forEach(b => b.classList.remove('selected'));
-  btn.classList.add('selected');
-  selectedSleepQuality = emoji;
+  btn.classList.add('selected'); selectedSleepQuality = emoji;
 }
 
 function recordSleep() {
-  const hrs = document.getElementById('sleepSlider').value;
+  const hrs   = document.getElementById('sleepSlider').value;
   const start = document.getElementById('sleepStart').value;
-  const end = document.getElementById('sleepEnd').value;
-
-  const prompt = `我昨晚的睡眠資料：睡了 ${hrs} 小時，入睡時間 ${start}，起床時間 ${end}，睡眠品質自評 ${selectedSleepQuality}。請用繁體中文給我簡短的睡眠分析和一個具體改善建議（100字內）。`;
-
+  const end   = document.getElementById('sleepEnd').value;
+  const prompt = `我昨晚的睡眠資料：睡了 ${hrs} 小時，入睡 ${start}，起床 ${end}，品質自評 ${selectedSleepQuality}。請用繁體中文給我簡短的睡眠分析和一個具體改善建議（100字內）。`;
   callGemini(prompt, 'sleepAI', 'sleepAIText');
-  showToast('✅ 睡眠已記錄');
+  showToast('✅ Sleep saved');
 }
 
+// ─── Food ───────────────────────────────────────────────
 function addFood() {
   const food = document.getElementById('foodInput').value.trim();
   if (!food) return;
-
   const today = toDateStr(new Date());
-  foods.push({
-    id: Date.now(),
-    meal: document.getElementById('mealType').value,
-    food,
-    time: document.getElementById('mealTime').value,
-    date: today
-  });
-
-  save();
-  renderFoods();
+  foods.push({ id: Date.now(), meal: document.getElementById('mealType').value, food, time: document.getElementById('mealTime').value, date: today });
+  save(); renderFoods();
   document.getElementById('foodInput').value = '';
-  showToast('✅ 飲食已記錄');
+  showToast('✅ Food logged');
 }
 
 function renderFoods() {
   const el = document.getElementById('foodLog');
   const today = toDateStr(new Date());
-  const todayFoods = foods.filter(f => f.date === today);
-
-  if (!todayFoods.length) {
-    el.innerHTML = '<div class="empty-state">今天還沒有飲食記錄</div>';
-    return;
-  }
-
-  el.innerHTML = todayFoods.map(f => `
+  const tf = foods.filter(f => f.date === today);
+  if (!tf.length) { el.innerHTML = '<div class="empty-state">No food logged today</div>'; return; }
+  el.innerHTML = tf.map(f => `
     <div class="food-item">
-      <div>
-        <div class="food-name">${f.meal} · ${f.food}</div>
-        <div class="food-time">${f.time}</div>
-      </div>
+      <div><div class="food-name">${f.meal} · ${f.food}</div><div class="food-time">${f.time}</div></div>
       <button class="delete-btn" onclick="deleteFood(${f.id})">✕</button>
     </div>
   `).join('');
 }
 
-function deleteFood(id) {
-  foods = foods.filter(f => f.id !== id);
-  save();
-  renderFoods();
-}
+function deleteFood(id) { foods = foods.filter(f => f.id !== id); save(); renderFoods(); }
 
 function getAIFoodAdvice() {
   const today = toDateStr(new Date());
-  const todayFoods = foods.filter(f => f.date === today);
-  if (!todayFoods.length) { showToast('先記錄一些飲食吧'); return; }
-
-  const summary = todayFoods.map(f => `${f.meal}(${f.time})：${f.food}`).join('、');
-  const prompt = `我今天的飲食記錄：${summary}。請用繁體中文分析營養均衡程度，並給出一個具體建議（100字內）。`;
-
+  const tf = foods.filter(f => f.date === today);
+  if (!tf.length) { showToast('Log some food first'); return; }
+  const summary = tf.map(f => `${f.meal}(${f.time})：${f.food}`).join('、');
+  const prompt = `我今天的飲食：${summary}。請用繁體中文分析這一餐的營養，給出具體建議（100字內）。`;
   callGemini(prompt, 'foodAI', 'foodAIText');
 }
 
-// ─── Exercise ─────────────────────────────────────────
-let selectedIntensity = '普通';
-let exercises = JSON.parse(localStorage.getItem('lifeos_exercises') || '[]');
-
+// ─── Exercise ───────────────────────────────────────────
 function selectIntensity(btn, level) {
   document.querySelectorAll('#exerciseIntensity .mood-btn').forEach(b => b.classList.remove('selected'));
-  btn.classList.add('selected');
-  selectedIntensity = level;
+  btn.classList.add('selected'); selectedIntensityVal = level;
 }
 
 function recordExercise() {
-  const type = document.getElementById('exerciseType').value;
+  const type     = document.getElementById('exerciseType').value;
   const duration = document.getElementById('exerciseDuration').value;
-  const note = document.getElementById('exerciseNote').value.trim();
-
-  if (!duration) { showToast('請輸入運動時間'); return; }
-
+  const note     = document.getElementById('exerciseNote').value.trim();
+  if (!duration) { showToast('Please enter duration'); return; }
   const today = toDateStr(new Date());
-  const entry = { id: Date.now(), date: today, type, duration, intensity: selectedIntensity, note };
-  exercises.push(entry);
+  exercises.push({ id: Date.now(), date: today, type, duration, intensity: selectedIntensityVal, note });
   localStorage.setItem('lifeos_exercises', JSON.stringify(exercises));
   renderExerciseLog();
-
-  const prompt = `我今天做了運動：${type} ${duration}分鐘，強度感受：${selectedIntensity}。${note ? '補充：' + note : ''}
-請用繁體中文：1）給我真誠的鼓勵（不要太誇張）2）根據強度建議明天適合做什麼運動或休息。語氣溫暖親切，100字內。`;
-
+  const prompt = `我今天做了：${type} ${duration}分鐘，強度${selectedIntensityVal}。${note ? '補充：'+note : ''}
+請用繁體中文：1）給我真誠的鼓勵 2）建議明天適合做什麼。語氣溫暖，100字內。`;
   callGemini(prompt, 'exerciseAI', 'exerciseAIText');
   document.getElementById('exerciseDuration').value = '';
   document.getElementById('exerciseNote').value = '';
-  showToast('✅ 運動已記錄');
+  showToast('✅ Workout saved');
 }
 
 function renderExerciseLog() {
   const el = document.getElementById('exerciseLog');
   const today = toDateStr(new Date());
-  const todayEx = exercises.filter(e => e.date === today);
-
-  if (!todayEx.length) {
-    el.innerHTML = '<div class="empty-state">今天還沒有運動記錄</div>';
-    return;
-  }
-
-  el.innerHTML = todayEx.map(e => `
+  const te = exercises.filter(e => e.date === today);
+  if (!te.length) { el.innerHTML = '<div class="empty-state">No workout logged today</div>'; return; }
+  el.innerHTML = te.map(e => `
     <div class="food-item">
-      <div>
-        <div class="food-name">${e.type} · ${e.duration} 分鐘</div>
-        <div class="food-time">強度：${e.intensity}${e.note ? ' · ' + e.note : ''}</div>
-      </div>
+      <div><div class="food-name">${e.type} · ${e.duration} min</div><div class="food-time">Intensity: ${e.intensity}${e.note ? ' · '+e.note : ''}</div></div>
       <button class="delete-btn" onclick="deleteExercise(${e.id})">✕</button>
     </div>
   `).join('');
 }
 
-function deleteExercise(id) {
-  exercises = exercises.filter(e => e.id !== id);
-  localStorage.setItem('lifeos_exercises', JSON.stringify(exercises));
-  renderExerciseLog();
+function deleteExercise(id) { exercises = exercises.filter(e => e.id !== id); localStorage.setItem('lifeos_exercises', JSON.stringify(exercises)); renderExerciseLog(); }
+
+// ─── Period ─────────────────────────────────────────────
+function toggleSymptom(btn) {
+  btn.classList.toggle('selected');
+  const s = btn.textContent;
+  if (btn.classList.contains('selected')) {
+    if (!selectedSymptoms.includes(s)) selectedSymptoms.push(s);
+  } else {
+    selectedSymptoms = selectedSymptoms.filter(x => x !== s);
+  }
 }
 
-// ─── Diary ────────────────────────────────────────────
+function selectFlow(btn, level) {
+  document.querySelectorAll('#flowLevel .mood-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected'); selectedFlow = level;
+}
+
+function recordPeriod() {
+  const start = document.getElementById('periodStart').value;
+  const days  = document.getElementById('periodDays').value;
+  const note  = document.getElementById('periodNote').value.trim();
+  if (!start) { showToast('Please select start date'); return; }
+  const entry = { id: Date.now(), start, days: days || '?', flow: selectedFlow, symptoms: [...selectedSymptoms], note };
+  periods.unshift(entry);
+  localStorage.setItem('lifeos_periods', JSON.stringify(periods));
+  renderPeriodLog();
+  const symStr = selectedSymptoms.length ? selectedSymptoms.join('、') : '無明顯症狀';
+  const prompt = `我的經期記錄：開始日期 ${start}，天數 ${days || '未填'}，血量 ${selectedFlow}，症狀：${symStr}。${note ? '感受：'+note : ''}
+請用繁體中文給我溫暖的建議，包含生活照護和飲食調整（120字內）。`;
+  callGemini(prompt, 'periodAI', 'periodAIText');
+  document.getElementById('periodNote').value = '';
+  showToast('✅ Period recorded');
+}
+
+function renderPeriodLog() {
+  const el = document.getElementById('periodLog');
+  if (!periods.length) { el.innerHTML = '<div class="empty-state">No records yet</div>'; return; }
+  el.innerHTML = periods.slice(0,6).map(p => `
+    <div class="period-log-item">
+      <div style="font-size:13px;font-weight:500;color:var(--text)">${p.start} · ${p.days} days · Flow: ${p.flow}</div>
+      ${p.symptoms.length ? `<div style="font-size:12px;color:var(--text3);margin-top:4px">${p.symptoms.join(' · ')}</div>` : ''}
+      ${p.note ? `<div style="font-size:12px;color:var(--text2);margin-top:4px">${p.note}</div>` : ''}
+    </div>
+  `).join('');
+}
+
+// ─── Diary ──────────────────────────────────────────────
 function selectMood(btn, emoji) {
   document.querySelectorAll('#diaryMood .mood-btn').forEach(b => b.classList.remove('selected'));
-  btn.classList.add('selected');
-  selectedMood = emoji;
+  btn.classList.add('selected'); selectedMood = emoji;
 }
 
 function saveDiary() {
   const text = document.getElementById('diaryInput').value.trim();
-  if (!text) { showToast('請先寫一些內容'); return; }
-
+  if (!text) { showToast('Write something first'); return; }
   const today = toDateStr(new Date());
-  const entry = { id: Date.now(), date: today, mood: selectedMood, text };
-
-  // Remove today's existing entry
   diaries = diaries.filter(d => d.date !== today);
-  diaries.unshift(entry);
-  save();
-  renderDiaryHistory();
-
+  diaries.unshift({ id: Date.now(), date: today, mood: selectedMood, text });
+  save(); renderDiaryHistory();
   const prompt = `以下是我今天的日記，請用繁體中文以溫暖、非評判的方式分析我的心理狀態，指出情緒模式，並給一個具體的心理健康建議（150字內）：\n\n心情：${selectedMood}\n內容：${text}`;
   callGemini(prompt, 'diaryAI', 'diaryAIText');
-  showToast('✅ 日記已儲存');
+  showToast('✅ Diary saved');
 }
 
 function renderDiaryHistory() {
   const el = document.getElementById('diaryHistory');
-  if (!diaries.length) {
-    el.innerHTML = '<div class="empty-state">還沒有日記記錄</div>';
-    return;
-  }
-
-  el.innerHTML = diaries.slice(0, 10).map(d => `
+  if (!diaries.length) { el.innerHTML = '<div class="empty-state">No diary entries yet</div>'; return; }
+  el.innerHTML = diaries.slice(0,10).map(d => `
     <div class="diary-history-item" onclick="loadDiary('${d.id}')">
       <div class="diary-history-date">${d.date} ${d.mood}</div>
       <div class="diary-history-preview">${d.text}</div>
@@ -1219,85 +1233,111 @@ function loadDiary(id) {
   const d = diaries.find(d => String(d.id) === String(id));
   if (!d) return;
   document.getElementById('diaryInput').value = d.text;
-  showToast(`已載入 ${d.date} 的日記`);
-  window.scrollTo(0, 0);
+  showToast(`Loaded entry from ${d.date}`);
+  window.scrollTo(0,0);
 }
 
-// ─── Gemini API ────────────────────────────────────────
-async function callGemini(prompt, boxId, textId) {
-  if (!apiKey) {
-    showToast('請先在設定中填入 API Key');
-    switchTab('settings');
-    return;
-  }
+// ─── Monthly Summary ────────────────────────────────────
+async function generateMonthlySummary() {
+  if (!apiKey) { showToast('Please add your API Key in Settings'); switchTab('settings'); return; }
 
-  const box = document.getElementById(boxId);
-  const textEl = document.getElementById(textId);
+  const now = new Date();
+  const month = now.getMonth() + 1;
+  const year  = now.getFullYear();
 
+  const totalIncome = clients.reduce((s, c) => s + Number(c.income || 0), 0);
+  const projectCount = clients.length;
+  const completedTodos = todos.filter(t => t.done).length;
+  const diaryCount = diaries.filter(d => d.date.startsWith(`${year}-${String(month).padStart(2,'0')}`)).length;
+  const periodSymptoms = periods.length ? periods[0].symptoms.join('、') : '無記錄';
+  const recentMoods = diaries.slice(0,5).map(d => d.mood).join(' ');
+
+  const prompt = `以下是我 ${year}年${month}月 的生活數據摘要，請用繁體中文生成一份溫暖且有洞察的月度總結報告，包含：工作回顧、生活習慣分析、心理狀態觀察，以及下個月的3個具體建議。
+
+工作：共 ${projectCount} 個專案，本月預估收入 NT$${totalIncome.toLocaleString()}，完成待辦 ${completedTodos} 項
+日記：寫了 ${diaryCount} 篇，近期心情 ${recentMoods || '無記錄'}
+經期症狀：${periodSymptoms}
+
+請以200字內完成，語氣像是一位關心我的朋友。`;
+
+  const box = document.getElementById('summaryBox');
+  const textEl = document.getElementById('summaryText');
   box.classList.add('show');
   textEl.innerHTML = '<div class="ai-loading"><span></span><span></span><span></span></div>';
 
   try {
     const res = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-      }
+      { method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ contents:[{ parts:[{ text: prompt }] }] }) }
     );
-
     const data = await res.json();
-
-    if (data.candidates && data.candidates[0]) {
-      const reply = data.candidates[0].content.parts[0].text;
-      textEl.textContent = reply;
-    } else if (data.error) {
-      textEl.textContent = `錯誤：${data.error.message}`;
+    if (data.candidates?.[0]) {
+      textEl.textContent = data.candidates[0].content.parts[0].text;
     } else {
-      textEl.textContent = '無法取得回覆，請檢查 API Key';
+      textEl.textContent = data.error ? `Error: ${data.error.message}` : 'Unable to generate report';
     }
-  } catch (e) {
-    textEl.textContent = '連線失敗，請檢查網路與 API Key';
-  }
+  } catch(e) { textEl.textContent = 'Connection failed. Check your API Key.'; }
 }
 
-// ─── Settings ─────────────────────────────────────────
+// ─── Gemini API ─────────────────────────────────────────
+async function callGemini(prompt, boxId, textId) {
+  if (!apiKey) { showToast('Add API Key in Settings first'); switchTab('settings'); return; }
+  const box = document.getElementById(boxId);
+  const textEl = document.getElementById(textId);
+  box.classList.add('show');
+  textEl.innerHTML = '<div class="ai-loading"><span></span><span></span><span></span></div>';
+  try {
+    const res = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
+      { method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ contents:[{ parts:[{ text: prompt }] }] }) }
+    );
+    const data = await res.json();
+    if (data.candidates?.[0]) {
+      textEl.textContent = data.candidates[0].content.parts[0].text;
+    } else {
+      textEl.textContent = data.error ? `Error: ${data.error.message}` : 'Check your API Key';
+    }
+  } catch(e) { textEl.textContent = 'Connection failed. Check your network and API Key.'; }
+}
+
+// ─── Settings ───────────────────────────────────────────
 function saveApiKey() {
   const key = document.getElementById('apiKeyInput').value.trim();
-  if (!key) { showToast('請輸入 API Key'); return; }
-  apiKey = key;
-  localStorage.setItem('lifeos_apikey', key);
-  showToast('✅ API Key 已儲存');
+  if (!key) { showToast('Please enter your API Key'); return; }
+  apiKey = key; localStorage.setItem('lifeos_apikey', key);
+  showToast('✅ API Key saved');
 }
 
 function saveName() {
   const name = document.getElementById('nameInput').value.trim();
   if (!name) return;
-  userName = name;
-  localStorage.setItem('lifeos_name', name);
-  document.getElementById('greeting').textContent =
-    `嗨，${name} 👋 今天也加油！`;
-  showToast('✅ 名字已儲存');
+  userName = name; localStorage.setItem('lifeos_name', name);
+  const h = new Date().getHours();
+  const greet = h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening';
+  document.getElementById('greeting').textContent = `${greet}, ${name} 👋`;
+  showToast('✅ Name saved');
 }
 
 function clearAll() {
-  if (!confirm('確定要清除所有資料嗎？')) return;
+  if (!confirm('Clear all data? This cannot be undone.')) return;
   localStorage.clear();
-  clients = []; todos = []; foods = []; diaries = [];
-  apiKey = ''; userName = '';
-  renderClients(); renderTodos(); renderFoods(); renderDiaryHistory();
+  clients=[]; todos=[]; foods=[]; diaries=[]; exercises=[]; periods=[];
+  apiKey=''; userName='';
+  renderClients(); renderTodos(); renderFoods(); renderExerciseLog(); renderDiaryHistory(); renderPeriodLog();
   document.getElementById('apiKeyInput').value = '';
   document.getElementById('nameInput').value = '';
-  showToast('已清除所有資料');
+  showToast('All data cleared');
 }
 
-// ─── Utils ────────────────────────────────────────────
+// ─── Utils ──────────────────────────────────────────────
 function save() {
-  localStorage.setItem('lifeos_clients', JSON.stringify(clients));
-  localStorage.setItem('lifeos_todos', JSON.stringify(todos));
-  localStorage.setItem('lifeos_foods', JSON.stringify(foods));
-  localStorage.setItem('lifeos_diaries', JSON.stringify(diaries));
+  localStorage.setItem('lifeos_clients',   JSON.stringify(clients));
+  localStorage.setItem('lifeos_todos',     JSON.stringify(todos));
+  localStorage.setItem('lifeos_foods',     JSON.stringify(foods));
+  localStorage.setItem('lifeos_diaries',   JSON.stringify(diaries));
+  localStorage.setItem('lifeos_periods',   JSON.stringify(periods));
 }
 
 function showToast(msg) {
