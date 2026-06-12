@@ -466,6 +466,49 @@
 
   .btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 
+  .progress-wrap {
+    margin-top: 8px;
+  }
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--text3);
+    margin-bottom: 4px;
+  }
+  .progress-bar {
+    width: 100%;
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: var(--work);
+    transition: width 0.3s;
+  }
+  .progress-fill.done { background: var(--life); }
+
+  .progress-input {
+    -webkit-appearance: none;
+    height: 6px;
+    border-radius: 3px;
+    background: var(--border);
+    padding: 0;
+    border: none;
+    margin: 4px 0 0 0;
+    width: 100%;
+  }
+  .progress-input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: var(--work);
+    cursor: pointer;
+  }
+
   .income-badge {
     display: inline-block;
     background: rgba(222,122,90,0.12);
@@ -1021,6 +1064,7 @@ function addClient() {
   });
 
   save(); renderClients(); updateTodoClientSelect();
+  sendToSheet({ type: 'project', date: toDateStr(new Date()), name: clients[clients.length-1].name, platform: clients[clients.length-1].platform, contentType: clients[clients.length-1].type, deadline: clients[clients.length-1].deadline, income: clients[clients.length-1].income, note: clients[clients.length-1].note, progress: 0, status: 'active' });
   document.getElementById('clientName').value = '';
   document.getElementById('clientNote').value = '';
   document.getElementById('clientIncome').value = '';
@@ -1031,15 +1075,27 @@ function renderClients() {
   const el = document.getElementById('clientList');
   if (!clients.length) { el.innerHTML = '<div class="empty-state">No projects yet</div>'; updateIncomeTotal(); return; }
 
-  el.innerHTML = clients.map(c => `
+  el.innerHTML = clients.map(c => {
+    const progress = c.progress || 0;
+    const fillClass = progress >= 100 ? 'progress-fill done' : 'progress-fill';
+    return `
     <div class="client-card">
       <div style="display:flex;justify-content:space-between;align-items:start">
-        <div>
+        <div style="flex:1;min-width:0">
           <div class="client-name">${c.name}</div>
           <div class="client-meta">${c.platform} · ${c.type}</div>
           ${c.deadline ? `<div class="client-meta">Due: ${c.deadline}</div>` : ''}
           ${c.note ? `<div class="client-meta">${c.note}</div>` : ''}
           ${c.income > 0 ? `<div class="income-badge">💰 NT$ ${Number(c.income).toLocaleString()}</div>` : ''}
+          <div class="progress-wrap">
+            <div class="progress-label">
+              <span>Progress</span>
+              <span>${progress}%</span>
+            </div>
+            <div class="progress-bar"><div class="${fillClass}" style="width:${progress}%"></div></div>
+            <input type="range" class="progress-input" min="0" max="100" step="5" value="${progress}"
+              oninput="updateProgress(${c.id}, this.value)">
+          </div>
           <span class="client-status status-${c.status}">${
             c.status === 'active' ? 'In Progress' : c.status === 'pending' ? 'Pending' : 'Done'
           }</span>
@@ -1047,7 +1103,7 @@ function renderClients() {
         <button class="delete-btn" onclick="deleteClient(${c.id})">✕</button>
       </div>
     </div>
-  `).join('');
+  `}).join('');
   updateIncomeTotal();
   updateTodoClientSelect();
 }
@@ -1061,6 +1117,30 @@ function updateIncomeTotal() {
 function deleteClient(id) {
   clients = clients.filter(c => c.id !== id);
   save(); renderClients(); showToast('Project removed');
+}
+
+function updateProgress(id, value) {
+  const c = clients.find(c => c.id === id);
+  if (!c) return;
+  c.progress = Number(value);
+  if (c.progress >= 100) c.status = 'done';
+  else if (c.progress > 0) c.status = 'active';
+  save();
+  sendToSheet({ type: 'project_progress', date: toDateStr(new Date()), name: c.name, progress: c.progress, status: c.status });
+  // Update just the progress display without full re-render
+  const cards = document.querySelectorAll('.client-card');
+  cards.forEach(card => {
+    const slider = card.querySelector('.progress-input');
+    if (slider && Number(slider.value) === Number(value)) {
+      const fill = card.querySelector('.progress-fill');
+      const label = card.querySelectorAll('.progress-label span')[1];
+      if (fill) {
+        fill.style.width = value + '%';
+        fill.className = Number(value) >= 100 ? 'progress-fill done' : 'progress-fill';
+      }
+      if (label) label.textContent = value + '%';
+    }
+  });
 }
 
 function updateTodoClientSelect() {
