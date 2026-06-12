@@ -930,6 +930,22 @@ let selectedSymptoms = [];
 let apiKey  = localStorage.getItem('lifeos_apikey') || '';
 let userName = localStorage.getItem('lifeos_name')  || '';
 
+// ─── Google Sheet Sync ─────────────────────────────────
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbylh-ytalNIzDkU97a1-p1wVlG_DjhYFe2Z265MPIr0J96EZwAAjhimjVxBC_zWyQb6PA/exec';
+
+async function sendToSheet(data) {
+  try {
+    await fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+  } catch(e) {
+    console.log('Sheet sync error:', e);
+  }
+}
+
 // ─── Init ───────────────────────────────────────────────
 function init() {
   const now = new Date();
@@ -1097,7 +1113,9 @@ function recordSleep() {
   const start = document.getElementById('sleepStart').value;
   const end   = document.getElementById('sleepEnd').value;
   const prompt = `我昨晚的睡眠資料：睡了 ${hrs} 小時，入睡 ${start}，起床 ${end}，品質自評 ${selectedSleepQuality}。請用繁體中文給我簡短的睡眠分析和一個具體改善建議（100字內）。`;
-  callGemini(prompt, 'sleepAI', 'sleepAIText');
+  callGemini(prompt, 'sleepAI', 'sleepAIText').then(aiText => {
+    sendToSheet({ type: 'sleep', date: toDateStr(new Date()), hours: hrs, bedtime: start, wakeup: end, quality: selectedSleepQuality, ai: aiText || '' });
+  });
   showToast('✅ Sleep saved');
 }
 
@@ -1108,6 +1126,7 @@ function addFood() {
   const today = toDateStr(new Date());
   foods.push({ id: Date.now(), meal: document.getElementById('mealType').value, food, time: document.getElementById('mealTime').value, date: today });
   save(); renderFoods();
+  sendToSheet({ type: 'food', date: toDateStr(new Date()), meal: document.getElementById('mealType').value, food, time: document.getElementById('mealTime').value, ai: '' });
   document.getElementById('foodInput').value = '';
   showToast('✅ Food logged');
 }
@@ -1153,7 +1172,9 @@ function recordExercise() {
   renderExerciseLog();
   const prompt = `我今天做了：${type} ${duration}分鐘，強度${selectedIntensityVal}。${note ? '補充：'+note : ''}
 請用繁體中文：1）給我真誠的鼓勵 2）建議明天適合做什麼。語氣溫暖，100字內。`;
-  callGemini(prompt, 'exerciseAI', 'exerciseAIText');
+  callGemini(prompt, 'exerciseAI', 'exerciseAIText').then(aiText => {
+    sendToSheet({ type: 'workout', date: toDateStr(new Date()), workoutType: type, duration, intensity: selectedIntensityVal, note, ai: aiText || '' });
+  });
   document.getElementById('exerciseDuration').value = '';
   document.getElementById('exerciseNote').value = '';
   showToast('✅ Workout saved');
@@ -1314,7 +1335,9 @@ async function callGemini(prompt, boxId, textId) {
     );
     const data = await res.json();
     if (data.candidates?.[0]) {
-      textEl.textContent = data.candidates[0].content.parts[0].text;
+      const reply = data.candidates[0].content.parts[0].text;
+      textEl.textContent = reply;
+      return reply;
     } else {
       textEl.textContent = data.error ? `Error: ${data.error.message}` : 'Check your API Key';
     }
